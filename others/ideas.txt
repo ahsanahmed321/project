@@ -1,0 +1,22 @@
+check reservation ke neeche bhi empty rooms jo ayenge wo clickable honge aur wese
+hi kaam karenge jese normal rooms karrahe honge
+
+har room ke andar service assign karne ka option hoga jo koi bhi employ avail 
+karsakta he
+
+jo bhi employ service ko avail karega wo uske saath jur jaengi aur mahine ke akhir
+me reward milega
+
+jo room current date men empty honge unke aek din ke lie bhi book kia jasakta he
+
+reservation cancel ka option dalna he
+
+reservation dates change ya alter ka option dalna he
+
+rooms ke andar current date ke query sirf non empty room ka number
+na lae bulke poora guest lae take room fill karsaken 
+
+aek naya ex-guest ka table banana he jo purane guest ka data hold kare
+jo rehke ja chuke hen checkout par guest exguest men shift hojae
+
+guest table ke andar sirf current guest ka data hona chahie

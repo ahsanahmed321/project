@@ -1,0 +1,67 @@
+reserve_in    reserve_out
+
+check_in      check_out
+
+
+select * from reservation where
+reservation.room = req.body.room and
+reserve_in < check_in  and  reserve_out > check_in ||
+reserve_in > check_in  and  reserve_out < check_out ||
+reserve_in < check_out and  reserve_out > check_out
+
+
+router.post("/addreservation", (req, res) => {
+  var reservation = {};
+
+  reservation.NIC = req.body.NIC;
+  reservation.name = req.body.name;
+  reservation.contact = req.body.contact;
+  reservation.staying_from = req.body.staying_from;
+  reservation.staying_to = req.body.staying_to;
+
+  //Reservation.find({ where: { room_room_no: req.body.room } });
+  Reservation.findAll({
+    [Op.and]: [
+      { room_room_no: req.body.room },
+      {
+        [Op.or]: [
+          {
+            [Op.and]: [
+              { staying_from: { [Op.gt]: req.body.reserve_in } },
+              { staying_from: { [Op.lt]: req.body.reserve_out } }
+            ]
+          },
+          {
+            [Op.and]: [
+              { staying_from: { [Op.lt]: req.body.reserve_in } },
+              { staying_to: { [Op.gt]: req.body.reserve_out } }
+            ]
+          },
+          {
+            [Op.and]: [
+              { staying_to: { [Op.gt]: req.body.reserve_in } },
+              { staying_to: { [Op.lt]: req.body.reserve_out } }
+            ]
+          }
+        ]
+      }
+    ]
+  })
+    .then(booking => {
+      if (booking) {
+        res.json("Room Already Booked");
+      } else {
+        Room.findOne({ where: { room_no: req.body.room } })
+          .then(room => {
+            room
+              .createReservation(reservation)
+              .then(sucess => res.json(sucess))
+              .catch(err => console.log(err));
+          })
+          .catch(err => console.log(err));
+      }
+    })
+    .catch(err => console.log(err));
+});
+
+
