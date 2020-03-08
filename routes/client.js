@@ -17,12 +17,23 @@ router.get("/getallclient", (req, res) => {
 });
 
 // Get Client By Name
-router.post("/getclient", (req, res) => {
+router.post("/getclientbyname", (req, res) => {
   Client.findAll({ where: { name: req.body.name } })
     .then(client => {
       res.json(client);
     })
     .catch(err => console.log(err));
+});
+
+// Get Client By Room No
+router.post("/getclientbyroom", (req, res) => {
+  Client.findAll({ where: { room_room_no: req.body.room } })
+    .then(client => {
+      res.json(client);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 // Add or Update Client

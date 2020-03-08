@@ -12,7 +12,7 @@ const Room = db.define(
       type: Sequelize.STRING
     },
     is_empty: {
-      type: Sequelize.STRING
+      type: Sequelize.BOOLEAN
     }
   },
   { freezeTableName: true, underscored: true }
