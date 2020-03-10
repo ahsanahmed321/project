@@ -17,7 +17,6 @@ router.get("/", (req, res) => {
 
 // Check Reservation
 router.post("/checkreservation", (req, res) => {
-  console.log("ahsan");
   console.log(req.body);
   check = {};
   check.staying_from = req.body.staying_from;
@@ -69,11 +68,14 @@ router.post("/checkreservation", (req, res) => {
               }
               // console.log(rooms);
               if (index === check.length - 1) {
+                console.log(rooms);
                 res.json(rooms);
               }
             })
             .catch(error => console.log(error));
         });
+      } else {
+        res.json({ msg: "All Rooms are Empty" });
       }
     })
     .catch(err => {
